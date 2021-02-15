@@ -175,3 +175,6 @@ pub use crate::encode::hash_structured_data;
 pub use crate::error::{ErrorKind, Error};
 /// EIP712 struct
 pub use crate::eip712::EIP712;
+pub use crate::eip712::EIP712Domain;
+pub use crate::eip712::FieldType;
+pub use crate::eip712::MessageTypes;

@@ -23,7 +23,7 @@ use validator::Validate;
 use validator::ValidationErrors;
 use lazy_static::lazy_static;
 
-pub(crate) type MessageTypes = HashMap<String, Vec<FieldType>>;
+pub type MessageTypes = HashMap<String, Vec<FieldType>>;
 
 lazy_static! {
 	// match solidity identifier with the addition of '[(\d)*]*'
@@ -34,23 +34,23 @@ lazy_static! {
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 #[derive(Deserialize, Serialize, Validate, Debug, Clone)]
-pub(crate) struct EIP712Domain {
-	pub(crate) name: String,
-	pub(crate) version: String,
-	pub(crate) chain_id: U256,
-	pub(crate) verifying_contract: Address,
+pub struct EIP712Domain {
+	pub name: String,
+	pub version: String,
+	pub chain_id: U256,
+	pub verifying_contract: Address,
 	#[serde(skip_serializing_if="Option::is_none")]
-	pub(crate) salt: Option<H256>,
+	pub salt: Option<H256>,
 }
 /// EIP-712 struct
 #[serde(rename_all = "camelCase")]
 #[serde(deny_unknown_fields)]
 #[derive(Deserialize, Debug, Clone)]
 pub struct EIP712 {
-	pub(crate) types: MessageTypes,
-	pub(crate) primary_type: String,
-	pub(crate) message: Value,
-	pub(crate) domain: EIP712Domain,
+	pub types: MessageTypes,
+	pub primary_type: String,
+	pub message: Value,
+	pub domain: EIP712Domain,
 }
 
 impl Validate for EIP712 {
@@ -65,7 +65,7 @@ impl Validate for EIP712 {
 }
 
 #[derive(Serialize, Deserialize, Validate, Debug, Clone)]
-pub(crate) struct FieldType {
+pub struct FieldType {
 	#[validate(regex = "IDENT_REGEX")]
 	pub name: String,
 	#[serde(rename = "type")]
